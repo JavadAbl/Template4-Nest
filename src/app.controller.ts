@@ -7,7 +7,7 @@ export class AppController {
 
   @Get()
   getHello(): string {
-    console.log(2);
+    throw new Error('Sd');
 
     return this.appService.getHello();
   }
