@@ -9,16 +9,14 @@ export class User {
   id: string = randomUUID();
 
   @Column({ unique: true })
-  email: string;
+  username: string;
 
   @Column()
   passwordHash: string;
 
-  @Column({ type: 'timestamp', nullable: true })
-  lastActive: Date;
-
   @ManyToOne(() => Organization, (entity) => entity.users, {
     onDelete: 'CASCADE',
+    nullable: false,
   })
   @JoinColumn({ name: 'organization_id' })
   organization: Organization;
@@ -26,6 +24,6 @@ export class User {
   @ManyToOne(() => UserRoles, (entity) => entity.user, {
     onDelete: 'CASCADE',
   })
-  @JoinColumn({ name: 'organization_id' })
+  @JoinColumn({ name: 'role_id' })
   role: UserRoles;
 }

@@ -3,9 +3,11 @@ import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Organization } from './entity/organization.entity';
+import { User } from './entity/user.entity';
+import { UserRoles } from './entity/user-roles';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Organization])],
+  imports: [TypeOrmModule.forFeature([Organization, User, UserRoles])],
   controllers: [AuthController],
   providers: [AuthService],
 })

@@ -28,7 +28,7 @@ export class Organization {
   updatedAt: Date;
 
   // Relationships
-  // @OneToMany(() => User, (user) => user.organization)
+  @OneToMany(() => User, (user) => user.organization)
   users: User[];
 
   // @OneToMany(() => ChartOfAccounts, (coa) => coa.organization)

@@ -9,36 +9,24 @@ import { Organization } from 'src/auth/entity/organization.entity';
 
 @Module({
   imports: [
-    ConfigModule,
+    ConfigModule.forRoot({ isGlobal: true }),
     AuthModule,
-    /*   TypeOrmModule.forRoot({
-      type: 'better-sqlite3',
-      database: 'db1.db',
-      entities: [Organization],
-      synchronize: true,
-    }),
-   
-    TypeOrmModule.forRoot({
-      type: 'mssql',
-      database: 'db2.db',
-      entities: [Organization],
-      dataSourceName: 'db2',
-    }), */
 
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
       inject: [ConfigService],
-
       useFactory: (configService: ConfigService) => ({
         type: 'better-sqlite3',
         database: 'db1.db',
+        //entities: [Organization],
         synchronize: true,
-        entities: [Organization],
 
         // database: configService.get<string>('DB_NAME'),
-        //autoLoadEntities: true,
+        autoLoadEntities: true,
       }),
     }),
+
+    //  TypeOrmModule.forFeature([Organization]),
   ],
   controllers: [AppController],
   providers: [AppService],
