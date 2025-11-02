@@ -16,7 +16,7 @@ import { Payment } from './payment.entity';
 import { Customer } from 'src/contacts/entity/ customer.entity';
 import { Vendor } from 'src/contacts/entity/vendor.entity';
 
-@Entity('invoices')
+@Entity('invoices', { synchronize: false })
 export class Invoice {
   @PrimaryColumn('uuid')
   id: string = randomUUID();

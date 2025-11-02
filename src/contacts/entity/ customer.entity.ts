@@ -9,7 +9,7 @@ import {
 } from 'typeorm';
 
 // customer.entity.ts
-@Entity()
+@Entity('customers', { synchronize: false })
 export class Customer {
   @PrimaryGeneratedColumn('uuid')
   id: string;

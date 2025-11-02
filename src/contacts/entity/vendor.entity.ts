@@ -12,7 +12,7 @@ import {
   JoinColumn,
 } from 'typeorm';
 
-@Entity('vendors')
+@Entity('vendors', { synchronize: false })
 export class Vendor {
   @PrimaryGeneratedColumn('uuid')
   id: string;

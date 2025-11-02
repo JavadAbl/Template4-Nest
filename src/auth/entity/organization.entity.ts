@@ -13,12 +13,12 @@ import { JournalEntry } from 'src/general-ledger/entity/journal-entry.entity';
 import { ChartOfAccounts } from 'src/general-ledger/entity/chart_of_accounts';
 import { Vendor } from 'src/contacts/entity/vendor.entity';
 
-@Entity('organizations')
+@Entity('organizations', { synchronize: true })
 export class Organization {
   @PrimaryColumn('uuid')
   id: string = randomUUID();
 
-  @Column()
+  @Column({ unique: true, nullable: false })
   name: string;
 
   @CreateDateColumn()

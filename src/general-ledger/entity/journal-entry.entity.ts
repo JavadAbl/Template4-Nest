@@ -12,7 +12,7 @@ import {
 import { JournalLine } from './journal-line.entity';
 import { randomUUID } from 'crypto';
 
-@Entity('journal_entries')
+@Entity('journal_entries', { synchronize: false })
 export class JournalEntry {
   @PrimaryColumn('uuid')
   id: string = randomUUID();

@@ -2,6 +2,7 @@ import {
   BadRequestException,
   ConflictException,
   Injectable,
+  NotFoundException,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Organization } from './entity/organization.entity';
@@ -13,6 +14,8 @@ import { UserCreateRequest } from './contract/request/user-create.request';
 import { UserDto } from './contract/dto/user.dto';
 import { User } from './entity/user.entity';
 import { CryptoUtils } from 'src/common/utils/crypto.utils';
+import { GetManyQueryRequest } from 'src/common/contract/request/get-many-query.request';
+import { TypeormUtils } from 'src/common/utils/typeorm.utils';
 
 @Injectable()
 export class AuthService {
@@ -47,6 +50,18 @@ export class AuthService {
     return dto;
   }
 
+  async getUsers(payload: GetManyQueryRequest): Promise<UserDto[]> {
+    const params = TypeormUtils.mapQueryToFindOptions<User>(payload);
+    const users = await this.repUser.find(params);
+    return users.map((val) => plainToInstance(UserDto, val));
+  }
+
+  async getUserById(id: number): Promise<UserDto> {
+    const user = await this.repUser.findOneBy({ id });
+    if (!user) throw new NotFoundException();
+    return plainToInstance(UserDto, user);
+  }
+
   async createOrganization(
     payload: OrganizationCreateRequest,
   ): Promise<OrganizationDto> {
@@ -64,5 +79,11 @@ export class AuthService {
   async getOrganizations(): Promise<OrganizationDto[]> {
     const organs = await this.repOrg.find();
     return organs.map((val) => plainToInstance(OrganizationDto, val));
+  }
+
+  async getOrganizationById(id: string): Promise<OrganizationDto> {
+    const organ = await this.repOrg.findOneBy({ id });
+    if (!organ) throw new NotFoundException();
+    return plainToInstance(OrganizationDto, organ);
   }
 }

@@ -3,7 +3,7 @@ import { Invoice } from './invoice.entity';
 import { randomUUID } from 'crypto';
 import { Account } from 'src/general-ledger/entity/account.entity';
 
-@Entity('invoice_lines')
+@Entity('invoice_lines', { synchronize: false })
 export class InvoiceLine {
   @PrimaryColumn('uuid')
   id: string = randomUUID();

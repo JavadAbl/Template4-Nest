@@ -2,7 +2,7 @@ import { randomUUID } from 'crypto';
 import { Organization } from 'src/auth/entity/organization.entity';
 import { Entity, PrimaryColumn, ManyToOne, JoinColumn, Column } from 'typeorm';
 
-@Entity('currency_rates')
+@Entity('currency_rates', { synchronize: false })
 export class CurrencyRate {
   @PrimaryColumn('uuid')
   id: string = randomUUID();

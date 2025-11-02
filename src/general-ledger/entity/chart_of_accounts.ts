@@ -11,7 +11,7 @@ import {
 import { Account } from './account.entity';
 import { randomUUID } from 'crypto';
 
-@Entity('')
+@Entity('chart_of_accounts', { synchronize: false })
 export class ChartOfAccounts {
   @PrimaryColumn('uuid')
   id: string = randomUUID();

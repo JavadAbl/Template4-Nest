@@ -11,7 +11,7 @@ import {
 } from 'typeorm';
 import { ReconciliationItem } from './reconciliation-item.entity';
 
-@Entity('reconciliation_records')
+@Entity('reconciliation_records', { synchronize: false })
 export class ReconciliationRecord {
   @PrimaryColumn('uuid')
   id: string = randomUUID();

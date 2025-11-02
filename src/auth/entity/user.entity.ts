@@ -1,18 +1,38 @@
 import { randomUUID } from 'crypto';
-import { Column, Entity, JoinColumn, ManyToOne, PrimaryColumn } from 'typeorm';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
 import { Organization } from './organization.entity';
 import { UserRoles } from './user-roles';
 
-@Entity('users')
+@Entity('users', { synchronize: true })
 export class User {
-  @PrimaryColumn('uuid')
-  id: string = randomUUID();
+  @PrimaryGeneratedColumn()
+  id: number;
 
-  @Column({ unique: true })
+  @Column('uuid', {
+    // generated: 'uuid',
+    unique: true,
+  })
+  uuid: string = randomUUID();
+
+  @Column({ unique: true, nullable: false })
   username: string;
 
   @Column()
   passwordHash: string;
+
+  @CreateDateColumn()
+  createdAt: Date;
+
+  @UpdateDateColumn()
+  updatedAt: Date;
 
   @ManyToOne(() => Organization, (entity) => entity.users, {
     onDelete: 'CASCADE',

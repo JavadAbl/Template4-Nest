@@ -17,10 +17,8 @@ import { Organization } from 'src/auth/entity/organization.entity';
       inject: [ConfigService],
       useFactory: (configService: ConfigService) => ({
         type: 'better-sqlite3',
-        database: 'db1.db',
-        //entities: [Organization],
+        database: 'app.db',
         synchronize: true,
-
         // database: configService.get<string>('DB_NAME'),
         autoLoadEntities: true,
       }),

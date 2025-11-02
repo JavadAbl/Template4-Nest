@@ -10,7 +10,7 @@ import {
   PrimaryColumn,
 } from 'typeorm';
 
-@Entity('audit_logs')
+@Entity('audit_logs', { synchronize: false })
 export class AuditLog {
   @PrimaryColumn('uuid')
   id: string = randomUUID();

@@ -12,7 +12,7 @@ import {
 import { JournalLine } from './journal-line.entity';
 import { ChartOfAccounts } from './chart_of_accounts';
 
-@Entity('accounts')
+@Entity('accounts', { synchronize: false })
 export class Account {
   @PrimaryColumn('uuid')
   id: string = randomUUID();

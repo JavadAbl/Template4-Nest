@@ -3,7 +3,7 @@ import { Account } from './account.entity';
 import { randomUUID } from 'crypto';
 import { JournalEntry } from './journal-entry.entity';
 
-@Entity('journal_lines')
+@Entity('journal_lines', { synchronize: false })
 export class JournalLine {
   @PrimaryColumn('uuid')
   id: string = randomUUID();

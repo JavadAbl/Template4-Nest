@@ -12,7 +12,7 @@ import { User } from 'src/auth/entity/user.entity';
 import { randomUUID } from 'crypto';
 import { Vendor } from 'src/contacts/entity/vendor.entity';
 
-@Entity('payments')
+@Entity('payments', { synchronize: false })
 export class Payment {
   @PrimaryColumn('uuid')
   id: string = randomUUID();
