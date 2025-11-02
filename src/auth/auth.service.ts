@@ -51,7 +51,9 @@ export class AuthService {
   }
 
   async getUsers(payload: GetManyQueryRequest): Promise<UserDto[]> {
-    const params = TypeormUtils.mapQueryToFindOptions<User>(payload);
+    const params = TypeormUtils.mapQueryToFindOptions<User>(payload, [
+      'username',
+    ]);
     const users = await this.repUser.find(params);
     return users.map((val) => plainToInstance(UserDto, val));
   }

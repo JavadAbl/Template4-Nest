@@ -17,18 +17,6 @@ export class Account {
   @PrimaryColumn('uuid')
   id: string = randomUUID();
 
-  @ManyToOne(() => Organization, (organization) => organization.accounts, {
-    onDelete: 'CASCADE',
-  })
-  @JoinColumn({ name: 'organization_id' })
-  organization: Organization;
-
-  @ManyToOne(() => ChartOfAccounts, (coa) => coa.accounts, {
-    onDelete: 'CASCADE',
-  })
-  @JoinColumn({ name: 'coa_id' })
-  chartOfAccounts: ChartOfAccounts;
-
   @Column()
   code: string;
 
@@ -51,6 +39,18 @@ export class Account {
   createdAt: Date;
 
   // Relationships
+  @ManyToOne(() => Organization, (organization) => organization.accounts, {
+    onDelete: 'CASCADE',
+  })
+  @JoinColumn({ name: 'organization_id' })
+  organization: Organization;
+
+  @ManyToOne(() => ChartOfAccounts, (coa) => coa.accounts, {
+    onDelete: 'CASCADE',
+  })
+  @JoinColumn({ name: 'coa_id' })
+  chartOfAccounts: ChartOfAccounts;
+
   @OneToMany(() => JournalLine, (line) => line.account)
   journalLines: JournalLine[];
 }

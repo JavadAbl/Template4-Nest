@@ -15,11 +15,12 @@ export class SeedService {
 
   async seed() {
     console.log('seed start');
+    console.time();
     await this.seedOrganization();
     await this.seedRoles();
     await this.seedUsers(100);
-
     console.log('seed end');
+    console.timeEnd();
   }
 
   async seedOrganization() {
@@ -67,38 +68,4 @@ export class SeedService {
 
     await this.em.save(users);
   }
-
-  /*  async seedUsers() {
-    if ((await this.em.count(User)) !== 0) return;
-    const users: User[] = [];
-
-    const organ = await this.em.findOneBy(Organization, { name: 'organ1' });
-    const role = await this.em.findOneBy(UserRoles, { role: 'admin' });
-    const user1 = new User();
-    user1.username = 'user1';
-    user1.organization = organ!;
-    user1.role = role!;
-    user1.passwordHash = await CryptoUtils.hashPassword('123');
-
-    const organ2 = await this.em.findOneBy(Organization, { name: 'organ1' });
-    const role2 = await this.em.findOneBy(UserRoles, { role: 'user' });
-    const user2 = new User();
-    user2.username = 'user2';
-    user2.organization = organ2!;
-    user2.role = role2!;
-    user2.passwordHash = await CryptoUtils.hashPassword('123');
-
-    const organ3 = await this.em.findOneBy(Organization, { name: 'organ2' });
-    const role3 = await this.em.findOneBy(UserRoles, { role: 'reader' });
-    const user3 = new User();
-    user3.username = 'user3';
-    user3.organization = organ3!;
-    user3.role = role3!;
-    user3.passwordHash = await CryptoUtils.hashPassword('123');
-
-    users.push(user1);
-    users.push(user2);
-    users.push(user3);
-    await this.em.save(users);
-  } */
 }
